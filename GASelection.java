@@ -1,4 +1,5 @@
 import java.lang.Math;
+import java.util.Arrays;
 public class GASelection{
     int popSize;
     int Fitness[];
@@ -15,6 +16,11 @@ public class GASelection{
     }
     
     public void select(){
+        int sortedFitness[] = Fitness.clone();
+        Arrays.sort(sortedFitness);
+        
+        
+        
         int CF = 0;
         cumulativeFitness = new int[popSize];
         for (int i=0; i< popSize; i++){     //calculate cumulative fitness
