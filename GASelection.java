@@ -5,6 +5,7 @@ public class GASelection{
     int Fitness[];
     int Ranks[];
     int cumulativeFitness[];
+    int parentsIndex[] = new int[2];
     //int crossoverStart = 41;
     //int mutationStart = 100;
 
@@ -16,7 +17,7 @@ public class GASelection{
         }
     }
     
-    public void select(){
+    public int[] select(){
         Ranks = new int[popSize];
         int rankValue = popSize;
         int sortedFitness[] = Fitness.clone();
@@ -30,21 +31,27 @@ public class GASelection{
                         } 
                     }
                     Ranks[j]=rankValue;
-                    Fitness[j]=-1;
+                    Fitness[j]=-1;                                  //to make sure that if a fitness value exists twice, the 2nd instance doesnt get ignored
                 }
             }
         }
-        
-        
         int CF = 0;
         cumulativeFitness = new int[popSize];
-        for (int i=0; i< popSize; i++){     //calculate cumulative fitness
-            CF = CF + Fitness[i];
+        for (int i=0; i< popSize; i++){                              //calculate cumulative fitness
+            CF = CF + Ranks[i];
             cumulativeFitness[i] = CF;
         }
         int min = 1;
         int max = cumulativeFitness[popSize-1];
-        int rouletteResult = (int)Math.floor(Math.random()*(max-min+1)+min);
-        
+        int random1 = (int)Math.floor(Math.random()*(max-min+1)+min); //generate random number
+        for (int i=0; i<popSize; i++){
+            if(random1<=cumulativeFitness[i]){
+                parentsIndex[0] = i;                                  //stores index of first parent
+            }
+        }
+        System.out.println("p1: "+ parentsIndex[0]);
+        parentsIndex[1]= 9;
+        System.out.println("p2: "+ parentsIndex[1]);
+        return parentsIndex;
     }
 }

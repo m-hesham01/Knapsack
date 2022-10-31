@@ -8,6 +8,8 @@ public class Manager{
     int popSize = 6;
     int popFitness[] = new int[popSize];
     int popWeight[] = new int[popSize];
+    int parentsIndex[] = new int[2];
+
     ArrayList<Knapsack> Population = new ArrayList<Knapsack>();
 
     public Manager(){ }
@@ -71,5 +73,13 @@ public class Manager{
                 popFitness[i] = gf.fitnessEval(Population.get(i));
             }
         }
+    }
+
+    public void selectTwoParents(){
+        GASelection gs = new GASelection(popSize, popFitness);
+        parentsIndex = gs.select();
+    }
+    public int[] getParentsIndex() {
+        return parentsIndex;
     }
 }
