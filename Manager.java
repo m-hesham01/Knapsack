@@ -75,9 +75,9 @@ public class Manager{
         }
     }
 
-    public void selectTwoParents(){
-        GASelection gs = new GASelection(popSize, popFitness);
-        parentsIndex = gs.select();
+    public void selectParents(){
+        GASelection selector = new GASelection(popSize, popFitness);
+        parentsIndex = selector.select();
     }
     public int[] getParentsIndex() {
         return parentsIndex;

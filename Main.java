@@ -26,7 +26,8 @@ public class Main{
             //}
             System.out.println("fitness: "+ (x.getFitness()));
         }
-        m.selectTwoParents();
+        m.selectParents();
+        m.getParentsIndex();
         System.out.println("test2");
         int parentsIndex[] = new int[2];
         parentsIndex = m.getParentsIndex();

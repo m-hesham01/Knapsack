@@ -49,6 +49,19 @@ public class GASelection{
                 parentsIndex[0] = i;                                  //stores index of first parent
             }
         }
+        
+        int ili = 3;
+        while (ili>2){                                                   //to make sure doesnt exit until exit condition is met (a second unique parent)
+            int random2 = (int)Math.floor(Math.random()*(max-min+1)+min); //generate second random number
+            for (int i=0; i<popSize; i++){
+                if(random2<=cumulativeFitness[i]){
+                    if(i!=parentsIndex[0]){                             //parent cant crossover with itself so this makes sure that it picks a different parent from the population
+                        parentsIndex[1]=i;
+                        ili=1;
+                    }
+                }
+            }   
+        }
         System.out.println("p1: "+ parentsIndex[0]);
         parentsIndex[1]= 9;
         System.out.println("p2: "+ parentsIndex[1]);
