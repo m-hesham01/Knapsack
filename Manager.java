@@ -76,10 +76,10 @@ public class Manager{
     }
 
     public void selectParents(){
-        GASelection selector = new GASelection(popSize, popFitness);
+        GASelect selector = new GASelect(popSize, popFitness);
         parentsIndex = selector.select();
     }
-    public int[] getParentsIndex() {
+    public int[] gettParents(){
         return parentsIndex;
     }
 }
