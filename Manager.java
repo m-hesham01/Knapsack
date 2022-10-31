@@ -8,7 +8,7 @@ public class Manager{
     int popSize = 6;
     int popFitness[] = new int[popSize];
     int popWeight[] = new int[popSize];
-    int parentsIndex[] = new int[2];
+    int parentsIndex[] = new int[popSize];
 
     ArrayList<Knapsack> Population = new ArrayList<Knapsack>();
 
@@ -76,10 +76,23 @@ public class Manager{
     }
 
     public void selectParents(){
-        GASelect selector = new GASelect(popSize, popFitness);
-        parentsIndex = selector.select();
+        int j = 0;
+        for(int i=0; i<(popSize/2); i++){
+            GASelect gs = new GASelect(popSize, popFitness);
+            int twoParents[] = new int[2];
+            twoParents = gs.select();
+            for (int k = 0; k<2; k++){
+                parentsIndex[j] = twoParents[k];
+                j++;
+            }
+        }
     }
-    public int[] gettParents(){
+    public int[] getParents(){
         return parentsIndex;
+    }
+
+    public void startCrossover(){
+        GACrossover gc = new GACrossover(Population, popSize, parentsIndex, Capacity, Nsize);
+        Population = gc.crossover();
     }
 }
