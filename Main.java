@@ -22,5 +22,6 @@ public class Main{
                 System.out.println(test.get(i).getItems().get(j));
             }
         }
+        m.performMutation();
     }
 }

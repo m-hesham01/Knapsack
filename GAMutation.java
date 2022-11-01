@@ -1,6 +1,8 @@
+import java.util.Random;
+
 public class GAMutation{
     Knapsack Child;
-    int mutation chance = 1;
+    int mutationChance = 1;
 
     public GAMutation(Knapsack k){
         Child = k;
@@ -11,10 +13,19 @@ public class GAMutation{
         Random random = new Random(); //generate random number
         int mutChance = random.nextInt(max - min)+min;
         if (mutChance == 1){
-            int min = 1;
-            int max = Child.getNumberOfItems();
-            Random random = new Random(); //generate random number
-            int mutPosition = random.nextInt(max - min)+min;
+
+
+            System.out.println("MUTATED");
+            System.out.println("was: ");
+            for (int i = 0; i<Child.getNumberOfItems();i++){
+                System.out.println(Child.getItems().get(i));
+            }
+
+
+            int minPos = 1;
+            int maxPos = Child.getNumberOfItems();
+            int mutPosition = random.nextInt(maxPos - minPos)+minPos;
+            System.out.println("mutPosition: "+ mutPosition);
 
             for (int i=0;i<Child.getNumberOfItems();i++){
                 if (mutPosition == i){
@@ -24,7 +35,12 @@ public class GAMutation{
                     else {Child.getItems().set(i, true);}
                 }
             }
+            System.out.println("became: ");
+            for (int i = 0; i<Child.getNumberOfItems();i++){
+                System.out.println(Child.getItems().get(i));
+            }
         }
+
         return Child;
     }
 }

@@ -95,4 +95,11 @@ public class Manager{
         GACrossover gc = new GACrossover(Population, popSize, parentsIndex, Capacity, Nsize);
         Population = gc.crossover();
     }
+
+    public void performMutation(){
+        for (int i=0; i<popSize; i++){
+            GAMutation gm = new GAMutation(Population.get(i));
+            gm.mutate();
+        }
+    }
 }

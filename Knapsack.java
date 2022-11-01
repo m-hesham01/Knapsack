@@ -30,9 +30,6 @@ public class Knapsack{
             Items.add(rd.nextBoolean());
         }
     }
-    public void setItemByIndex(int index, Boolean value){
-        Items.set(index, value);
-    }
     public ArrayList<Boolean> getItems(){
         return Items;
     }
@@ -50,5 +47,4 @@ public class Knapsack{
     public int getFitness(){
         return fitness;
     }
-
 }
