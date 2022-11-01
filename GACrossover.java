@@ -24,27 +24,9 @@ public class GACrossover {
     }
 
     public ArrayList<Knapsack> crossover(){
-        System.out.println("Parents Index:");
-        for (int i=0; i<parentsIndex.length; i++){
-            System.out.println(parentsIndex[i]);
-        }
-
-        System.out.println("Population:");
-        for (int i=0; i<parentsIndex.length; i++){
-            System.out.println(i);
-            for (int j=0; j<Nsize; j++){
-                System.out.println(Population.get(i).getItems().get(j));
-            }
-        }
-
-        System.out.println("Parents:");
         for (int i=0; i<parentsIndex.length; i++){
             Knapsack k = Population.get(parentsIndex[i]);
             Parents.add(k); //got 2 parents that got chosen from selection phase
-            System.out.println(i);
-            for (int j=0; j<Nsize; j++){
-                System.out.println(Parents.get(i).getItems().get(j));
-            }
         }
 
         int j = 0;
@@ -60,7 +42,6 @@ public class GACrossover {
             int crossoverChance = random.nextInt(max - min)+min;
 
             if(crossoverChance > crossoverStart){
-                System.out.println(crossoverChance + " crossover occurs");
                 Knapsack c1 = new Knapsack();
                 c1.setCapacity(Capacity);
                 c1.setNumberOfItems(Nsize);
@@ -79,7 +60,6 @@ public class GACrossover {
                 Children.add(c2);
             }
             else{
-                System.out.println(crossoverChance + " NO Crossover");
                 Children.add(p1);
                 Children.add(p2);
             }
