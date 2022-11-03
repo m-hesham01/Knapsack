@@ -1,10 +1,11 @@
 import java.util.ArrayList;
 
 public class Manager{
-    int genSize = 10;
-    int popSize = 6;
-    int Capacity;
-    int Nsize;
+    int genSize = 3;        //number of generations
+    int popSize = 6;        //population size
+    int Capacity;           //knapsack max capacity
+    int Nsize;              //number of items to choose from
+    int testCaseIndex;
     int Values[];
     int Weights[];
     int popFitness[] = new int[popSize];
@@ -27,6 +28,10 @@ public class Manager{
     }
     public int getNSize(){
         return Nsize;
+    }
+
+    public void setTestCaseIndex(int TCI) {
+    testCaseIndex = TCI;
     }
 
     public void setValues(int V[]){
@@ -107,9 +112,6 @@ public class Manager{
     
     public void produceOutput(){
         calculateFitness();
-        for (int i=0; i<popSize;i++){
-            System.out.println("fitness: "+ Population.get(i).getFitness());
-        }
         int max = 0;
         for (int i=0; i<popSize; i++){
             if(Population.get(i).getFitness()>max){
@@ -117,7 +119,6 @@ public class Manager{
                 Winner = Population.get(i);
             }
         }
-        System.out.println("winner fitness: "+Winner.getFitness());
         int NSelected = 0;
         for (int i=0; i<Winner.getNumberOfItems();i++){
             if(Winner.getItems().get(i) == true){
@@ -134,22 +135,27 @@ public class Manager{
                 j++;
             }
         }
-        System.out.println("number of selected items: "+ NSelected);
+        System.out.println("----- TEST CASE INDEX: "+ testCaseIndex + " -----");
+        System.out.println("-> number of selected items: "+ NSelected);
+        System.out.println();
         for (int i=0; i<NSelected; i++){
-            System.out.println("weight of Item "+ (i+1) + ": "+ winnerWeights[i]);
-            System.out.println("value of Item "+ (i+1)+ ": " + winnerValues[i]);
+            System.out.println("* weight of Item "+ (i+1) + ":    "+ winnerWeights[i]+" *");
+            System.out.println("* value  of Item "+ (i+1)+ ":    " + winnerValues[i]+" *");
         }
-        System.out.println("total weight: "+ Winner.getTotalWeight());
-        System.out.println("total value/fitness: "+ Winner.getFitness());
+        System.out.println();
+        System.out.println("----- total weight: "+ Winner.getTotalWeight()+" ----");
+        System.out.println("---- total fitness: "+ Winner.getFitness()+" ----");
+
+        System.out.println("----------------------------------------------------------");
     }
-    // public void createGenerations(){
-    //     createKnapSacks();
-    //     for(int i=0; i<genSize; i++){
-    //     calculateFitness();
-    //     selectParents();
-    //     startCrossover();
-    //     performMutation();
-    //     }
-    //     produceOutput();
-    // }
+    public void createGenerations(){
+        createKnapSacks();
+        for(int i=0; i<genSize; i++){
+        calculateFitness();
+        selectParents();
+        startCrossover();
+        performMutation();
+        }
+        produceOutput();
+    }
 }
